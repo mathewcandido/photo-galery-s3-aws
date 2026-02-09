@@ -1,61 +1,236 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 📸 Photo Gallery AWS S3
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Uma aplicação web moderna para gerenciamento de galeria de fotos com integração ao AWS S3, construída com Laravel e Tailwind CSS.
 
-## About Laravel
+## ✨ Características
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- 🖼️ **Upload de Imagens**: Upload seguro de imagens diretamente para o AWS S3
+- 🎨 **Interface Moderna**: Design responsivo construído com Tailwind CSS
+- 🔄 **Service Pattern**: Arquitetura limpa com padrão de serviços e interfaces
+- 🌐 **Multilíngue**: Suporte para Português Brasileiro e Inglês
+- ⚡ **Performance**: Vite para build rápido e desenvolvimento eficiente
+- 🔒 **Seguro**: Validação robusta de uploads e tratamento de erros
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🛠️ Tecnologias
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Backend**: Laravel 12 (PHP 8.2+)
+- **Frontend**: Tailwind CSS 4, Vite 7
+- **Cloud**: AWS S3 para armazenamento de imagens
+- **Database**: MySQL/PostgreSQL
+- **Tools**: Laravel Pint, PHPUnit, Laravel Sail
 
-## Learning Laravel
+## 📋 Pré-requisitos
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- PHP 8.2 ou superior
+- Composer
+- Node.js 18+ e npm
+- MySQL/PostgreSQL
+- Conta AWS com S3 configurado
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## 🚀 Instalação
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 1. Clone o repositório
 
-## Laravel Sponsors
+```bash
+git clone <seu-repositorio>
+cd photo-gallery
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 2. Instale as dependências
 
-### Premium Partners
+```bash
+# Dependências PHP
+composer install
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+# Dependências JavaScript
+npm install
+```
 
-## Contributing
+### 3. Configure o ambiente
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-## Code of Conduct
+### 4. Configure o banco de dados
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Edite o arquivo `.env` com suas credenciais:
 
-## Security Vulnerabilities
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=photo_gallery
+DB_USERNAME=seu_usuario
+DB_PASSWORD=sua_senha
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 5. Configure o AWS S3
 
-## License
+Adicione suas credenciais AWS no `.env`:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```env
+AWS_ACCESS_KEY_ID=sua_access_key
+AWS_SECRET_ACCESS_KEY=sua_secret_key
+AWS_DEFAULT_REGION=sua_regiao
+AWS_BUCKET=nome_do_bucket
+AWS_USE_PATH_STYLE_ENDPOINT=false
+```
+
+### 6. Execute as migrações
+
+```bash
+php artisan migrate
+```
+
+### 7. Compile os assets
+
+```bash
+# Desenvolvimento
+npm run dev
+
+# Produção
+npm run build
+```
+
+### 8. Inicie o servidor
+
+```bash
+php artisan serve
+```
+
+A aplicação estará disponível em `http://localhost:8000`.
+
+## ⚙️ Configuração AWS S3
+
+### Configuração do Bucket S3
+
+1. Crie um bucket no S3
+2. Configure as permissões adequadas (política de bucket)
+3. Ative o versionamento (opcional)
+4. Configure CORS para permitir uploads do frontend
+
+Exemplo de política CORS:
+
+```json
+[
+    {
+        "AllowedHeaders": ["*"],
+        "AllowedMethods": ["GET", "PUT", "POST", "DELETE"],
+        "AllowedOrigins": ["http://localhost:8000"],
+        "ExposeHeaders": []
+    }
+]
+```
+
+## 🎯 Uso
+
+### Upload de Imagens
+
+1. Acesse a página principal
+2. Clique em "Upload Image" ou arraste e solte arquivos
+3. Adicione um título para a imagem
+4. Confirme o upload
+
+### Visualização
+
+- As imagens são exibidas em uma galeria responsiva
+- Clique em uma imagem para visualizar em tamanho completo
+- Navegue entre as imagens usando os controles
+
+## 🏗️ Arquitetura
+
+### Estrutura do Projeto
+
+```
+app/
+├── Http/Controllers/
+│   └── GalleryController.php     # Controle da galeria
+├── Interfaces/
+│   └── ImageServiceInterface.php # Interface do serviço
+├── Models/
+│   ├── Image.php                 # Model da imagem
+│   └── User.php                  # Model do usuário
+├── Services/
+│   ├── ImageServiceToFileSystem.php # Serviço local
+│   └── ImageServiceToS3.php         # Serviço AWS S3
+└── View/Components/
+    └── Image.php                 # Componente de imagem
+```
+
+### Padrões Utilizados
+
+- **Repository Pattern**: Para abstração do acesso aos dados
+- **Service Pattern**: Para lógica de negócio
+- **Interface Segregation**: Para flexibilidade na implementação
+- **Dependency Injection**: Para inversão de dependência
+
+## 🧪 Testes
+
+Execute os testes usando PHPUnit:
+
+```bash
+# Executar todos os testes
+php artisan test
+
+# Executar testes específicos
+php artisan test --filter GalleryControllerTest
+
+# Executar com cobertura
+php artisan test --coverage
+```
+
+## 📦 Deploy
+
+### Produção com Laravel Sail
+
+```bash
+# Build da aplicação
+sail up -d
+sail artisan migrate --force
+sail npm run build
+```
+
+### Deploy Manual
+
+1. Configure o servidor web (Apache/Nginx)
+2. Instale as dependências de produção
+3. Configure as variáveis de ambiente
+4. Execute as migrações
+5. Otimize a aplicação
+
+```bash
+composer install --optimize-autoloader --no-dev
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+```
+
+## 🤝 Contribuição
+
+1. Fork o projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
+
+## 📄 Licença
+
+Este projeto está licenciado sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+## 🆘 Suporte
+
+Se você encontrar algum problema ou tiver dúvidas:
+
+1. Verifique se todas as dependências estão instaladas
+2. Confirme se as configurações do AWS S3 estão corretas
+3. Verifique os logs da aplicação em `storage/logs/`
+4. Abra uma issue no GitHub
+
+## 📚 Recursos Úteis
+
+- [Documentação do Laravel](https://laravel.com/docs)
+- [Documentação do AWS S3](https://docs.aws.amazon.com/s3/)
+- [Documentação do Tailwind CSS](https://tailwindcss.com/docs)
+- [Documentação do Vite](https://vitejs.dev/)
